@@ -7,6 +7,19 @@ export const userContext = createContext({
 
 function App() {
   const [user, setUser] = useState("dullat")
+  const inputRef = useRef()
+
+  function handleFocus() {
+    inputRef.current.style = "background-color: red"
+  }
+
+  function removeFocus() {
+    inputRef.current.style = "background-color: yellow"
+  }
+
+  useEffect(() => {
+    console.log(inputRef.current)
+  })
 
   return (
     <>
@@ -16,6 +29,13 @@ function App() {
         <userContext.Provider value={{ user, setUser }}>
           <ComponantA />
         </userContext.Provider>
+        <input
+          type="text"
+          onFocus={handleFocus}
+          onBlur={removeFocus}
+          ref={inputRef}
+          className="bg-yellow-500"
+        />
       </div>
     </>
   )
